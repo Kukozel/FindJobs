@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>图片轮转效果-小猪</title>
+
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    
+    <style type="text/css">
+    *{margin: 0px;padding: 0px}
+    body{margin-left: 400px;margin-top: 200px;}
+    #box{width: 428px;height: 286px;position: relative;}
+    #picture{width: 428px;height: 286px;position: relative;top: 0px;left: 0px;}
+    img{display: none;position: absolute;}
+    #btn{width: 130px;height: 25px;border: 0px solid #3ff;position: absolute;bottom: 5px;right: 0px}
+    #btn ul li{
+    list-style: none;width: 25px;height: 25px;float: left;
+    background: #ccff99;border-radius: 15px;text-align: center;
+    line-height: 25px;margin-left: 5px;}
+   
+    #btn ul .select{background: #ccffff}
+    </style>
+
+
+  </head>
+  
+  <body>
+  
+    <div id="box">
+    
+    <div id="picture">
+    <img alt="第一张图片" src="./static/images/image1.jpg" width="428" height="286" style="display: block;"/>
+    <img alt="第二张图片" src="./static/images/image2.jpg" width="428" height="286"/>
+    <img alt="第三张图片" src="./static/images/image3.jpg" width="428" height="286"/>
+    </div>
+   
+    <!-- 小图片 -->
+    <div id="btn">
+    <ul>
+    <li class="select">1</li>
+    <li>2</li>
+    <li>3</li>
+    </ul>
+    </div>
+    </div>
+    
+    <script type="text/javascript">
+    
+    var index = 0;
+    var begin = null;
+    $("#btn ul li").hover(function(){
+    clearInterval(begin);
+    $(this).addClass("select").siblings().removeClass("select");
+    index = $(this).index();
+    $("#picture img").eq(index).show().siblings().hide();
+    }, function(){auto();});
+   
+    function auto(){
+    begin = setInterval(function(){
+    index ++;
+    if (index >= 3) {
+index = 0;
+}
+    $("#btn ul li").eq(index).addClass("select").siblings().removeClass("select");
+    $("#picture img").eq(index).show().siblings().hide();
+    }, 2000);
+    }
+    auto();
+   
+    </script>
+    
+  </body>
+</html>
